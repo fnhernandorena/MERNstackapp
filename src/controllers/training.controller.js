@@ -6,11 +6,15 @@ export const getTrainings = async (req, res) => {
 };
 export const createTraining = async (req, res) => {
 
-    const { title, description, date } = req.body;
-
+    const { description,chest, back, legs, biceps, triceps, shoulders, date } = req.body;
     const newTraining = new Training({
-        title,
         description,
+        chest,
+        back,
+        legs,
+        biceps,
+        triceps,
+        shoulders,
         date,
         user: req.user.id
     });

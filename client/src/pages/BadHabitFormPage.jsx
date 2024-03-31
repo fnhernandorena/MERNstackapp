@@ -1,33 +1,35 @@
 import { useForm } from "react-hook-form";
-import { useTasks } from "../context/TaskContext";
+import { useBadHabits } from "../context/BadHabitContex";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 
-function TaskFormPage() {
+function BadHabitFormPage() {
   const { handleSubmit, register, setValue } = useForm();
-  const { createTask, getTask, updateTask } = useTasks();
+  const { createBadHabit, getBadHabit, updateBadHabit } = useBadHabits();
   const navigate = useNavigate();
   const params = useParams();
+
+  let timesArr = [];
 
   useEffect(() => {
     async function loadTask() {
       if (params.id) {
-        const task = await getTask(params.id);
+        const task = await getBadHabit(params.id);
         setValue("title", task.title);
-        setValue("description", task.description);
-        setValue("isDone", task.isDone);
+        timesArr = task.times
       }
     }
     loadTask();
-  }, [params.id, getTask, setValue]);
+  }, [params.id, getBadHabit, setValue]);
 
-  const onSubmit = handleSubmit((data) => {
+  const onSubmit = handleSubmit(async(data) => {
     if (params.id) {
-      updateTask(params.id, data);
+        timesArr.push(data.times)
+         updateBadHabit(params.id, { ...data, times: timesArr });
     } else {
-      createTask(data);
+     createBadHabit(data);
     }
-    navigate("/tasks");
+    navigate("/badhabits");
   });
   return (
     <div className="flex justify-center">
@@ -39,25 +41,17 @@ function TaskFormPage() {
           className="bg-zinc-700 w-full my-1 p-1 text-xl rounded-lg"
           autoFocus
         />
-        <textarea
-          rows="3"
-          placeholder="Description"
-          {...register("description")}
-          className="bg-zinc-700 w-full my-1 p-1 text-xl rounded-lg"
-        ></textarea>
-        <div className=" p-1 flex justify-between text-xl border-b border-white">
-        {" "}
-        <label>Done</label>
         <input
-          className="w-6 h-6"
-          type="checkbox"
-        {...register("isDone")}
+          type="number"
+          placeholder="Times"
+          {...register("times")}
+          className="bg-zinc-700 w-full my-1 p-1 text-xl rounded-lg"
+          autoFocus
         />
-      </div>
         <button className="w-full bg-sky-600 mt-2 p-2 rounded-xl hover:bg-black duration-300">Save</button>
       </form>
     </div>
   );
 }
 
-export default TaskFormPage;
+export default BadHabitFormPage;

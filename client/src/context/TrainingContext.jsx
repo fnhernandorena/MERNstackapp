@@ -33,8 +33,7 @@ export function TrainingProvider({ children }) {
   };
 
   const createTraining = async (training) => {
-    const res = await createTrainingRequest(training);
-    console.log(res);
+    createTrainingRequest(training);
   };
 
   const deleteTraining = async (id) => {

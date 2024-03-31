@@ -1,13 +1,33 @@
 import mongoose from "mongoose";
 
 const trainingSchema = new mongoose.Schema({
-    title:{
-        type:String,
-        required:true
-    },
     description:{
         type:String,
         required:true
+    },
+    chest: {
+        type: Boolean,
+        default: false
+    },
+    back: {
+        type: Boolean,
+        default: false
+    },
+    legs: {
+        type: Boolean,
+        default: false
+    },
+    biceps: {
+        type: Boolean,
+        default: false
+    },
+    triceps: {
+        type: Boolean,
+        default: false
+    },
+    shoulders: {
+        type: Boolean,
+        default: false
     },
     date:{
         type:Date,

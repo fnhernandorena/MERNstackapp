@@ -15,7 +15,7 @@ function TasksPage() {
       <div className="flex p-1 flex-col">
         <Link
           to="/add-task"
-          className="w-full bg-sky-600 p-1 text-xl font-bold  text-center  rounded-xl"
+          className="w-full hover:bg-black duration-300 bg-sky-600 p-1 text-xl font-bold  text-center  rounded-xl"
         >
           Add task
         </Link>
