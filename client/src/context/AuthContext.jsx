@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (errors.length > 0) {
+    if (errors) {
       const timer = setTimeout(() => {
         setErrors([]);
       }, 5000);
@@ -36,8 +36,7 @@ export const AuthProvider = ({ children }) => {
         setIsAuthenticated(true);
       }
     } catch (error) {
-      console.log(error.response.data);
-      setErrors(error.response.data.message);
+      setErrors(error.response.data);
     }
   };
 
@@ -47,8 +46,7 @@ export const AuthProvider = ({ children }) => {
       setUser(res.data);
       setIsAuthenticated(true);
     } catch (error) {
-      console.log(error);
-      // setErrors(error.response.data.message);
+       setErrors(error.response.data);
     }
   };
 

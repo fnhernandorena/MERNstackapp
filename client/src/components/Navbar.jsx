@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 export function Navbar() {
@@ -10,12 +10,12 @@ export function Navbar() {
         {isAuthenticated ? (
           <div>
             <div className="flex justify-around items-center flex-row w-full py-2 flex-wrap">
-              <Link
+              <NavLink
                 to="/profile"
-                className="text-3xl p-4 text-center font-bold bg-gradient-to-r from-blue-800 to-indigo-900 rounded-lg duration-300 hover:text-black"
+                className="text-3xl p-4 text-center font-bold bg-gradient-to-tr from-blue-500 rounded-lg duration-300 hover:text-black"
               >
                 <h1>My Best Version</h1>
-              </Link>
+              </NavLink>
 
               <p className="text-2xl font-bold text-center border-b-2 border-white">
                 Welcome {user.username}!
@@ -24,53 +24,53 @@ export function Navbar() {
 
             <div className="flex justify-around flex-row w-full flex-wrap">
               {" "}
-              <Link
+              <NavLink
                 to="/tasks"
                 className="text-xl text-center h-full font-bold py-2 px-4 w-36 bg-sky-600 rounded-3xl duration-300 hover:bg-black m-1"
               >
                 Task
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
                 to="/training"
                 className="text-xl text-center font-bold py-2 w-36 px-4 bg-sky-600 rounded-3xl duration-300 hover:bg-black m-1"
               >
                 Training
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
                 to="/badhabits"
                 className="text-xl justify-center font-bold py-2 w-36 px-4 flex bg-sky-600 rounded-3xl duration-300 hover:bg-black m-1"
               >
                 Bad habits
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
                 to="/"
                 onClick={() => logout()}
                 className="text-xl text-center font-bold py-2 w-36 px-4 bg-sky-600 rounded-3xl duration-300 hover:bg-black m-1"
               >
                 Logout
-              </Link>
+              </NavLink>
             </div>
           </div>
         ) : (
           <div className="flex justify-around items-center flex-row w-full py-2 flex-wrap">
-              <Link
+              <NavLink
                 to="/"
-                className="text-3xl p-4 text-center font-bold bg-gradient-to-r from-blue-800 to-indigo-900 rounded-lg duration-300 hover:text-black"
+                className="text-3xl p-4 text-center font-bold bg-gradient-to-tr from-blue-500 rounded-lg duration-300 hover:text-black"
               >
                 <h1>My Best Version</h1>
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
                 to="/login"
                 className="text-xl text-center font-bold py-2 w-36 px-4 bg-sky-600 rounded-3xl duration-300 hover:bg-black m-1"
               >
                 Login
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
                 to="/register"
                 className="text-xl text-center font-bold py-2 w-36 px-4 bg-sky-600 rounded-3xl duration-300 hover:bg-black m-1"
               >
                 Register
-              </Link>
+              </NavLink>
           </div>
         )}
       </ul>

@@ -35,14 +35,13 @@ export const register = async (req, res) => {
 //login function
 export const login = async (req, res) => {
     const { email, password } = req.body
-
     try {
         //email comparation
         const userFound = await User.findOne({ email });
-        if (!userFound) return res.status(400).json({ message: 'User not found, email or password invalid' });
+        if (!userFound) return res.status(400).json([ 'User not found, email or password invalid']);
         //password comparation
         const isMatch = await bcrypt.compare(password, userFound.password);
-        if (!isMatch) return res.status(400).json({ message: 'User not found, email or password invalid' });
+        if (!isMatch) return res.status(400).json(['User not found, email or password invalid']);
 
         const token = await createAccessToken({ id: userFound._id })
         res.cookie('token', token)

@@ -7,7 +7,7 @@ import { createBadHabitSchema } from "../schemas/badhabit.schema.js";
 const router = Router();
 
 router.get('/badhabits', authRequired, getBadHabits)
-router.post('/badhabits', authRequired, createBadHabit)
+router.post('/badhabits', authRequired, validateSchema(createBadHabitSchema), createBadHabit)
 router.get('/badhabits/:id', authRequired, getBadHabit)
 router.put('/badhabits/:id', authRequired, updateBadHabit)
 router.delete('/badhabits/:id', authRequired, deleteBadHabit)

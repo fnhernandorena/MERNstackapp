@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import {
   createTaskRequest,
@@ -22,50 +22,52 @@ export const useTasks = () => {
 
 export function TaskProvider({ children }) {
   const [tasks, setTasks] = useState([]);
+  const [errors, setErrors] = useState([]);
+
+  useEffect(() => {
+    if (errors) {
+      const timer = setTimeout(() => {
+        setErrors([]);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [errors]);
 
   const getTasks = async () => {
-    try {
       const res = await getTasksRequest();
       setTasks(res.data);
-    } catch (err) {
-      console.log(err);
-    }
   };
 
   const createTask = async (task) => {
+    try{
     const res = await createTaskRequest(task);
     console.log(res);
+  } catch (error) {
+    setErrors(error.response.data);
+  }
   };
 
   const deleteTask = async (id) => {
-    try {
       const res = await deleteTaskRequest(id);
       if (res.status === 204) setTasks(tasks.filter((task) => task._id !== id));
-    } catch (err) {
-      console.log(err);
-    }
   };
 
   const getTask = async (id) => {
-    try {
       const res = await getTaskRequest(id);
       return res.data;
-    } catch (err) {
-      console.log(err);
-    }
   };
 
   const updateTask = async (id, task) => {
     try {
       await updateTaskRequest(id, task);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      setErrors(error.response.data);
     }
   };
 
   return (
     <TaskContext.Provider
-      value={{ tasks, createTask, getTasks, deleteTask, getTask, updateTask }}
+      value={{ tasks, errors, createTask, getTasks, deleteTask, getTask, updateTask }}
     >
       {children}
     </TaskContext.Provider>

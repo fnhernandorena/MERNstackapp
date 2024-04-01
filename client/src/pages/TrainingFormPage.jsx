@@ -36,7 +36,7 @@ function TrainingFormPage() {
   return (
     <div className="flex justify-center">
       <form onSubmit={onSubmit} className="flex flex-col w-96">
-        <h2 className="text-3xl font-bold mb-2">Today`s training!</h2>
+        <h2 className="text-3xl font-bold mb-2">Add a new training!</h2>
         <div className=" p-1 flex justify-between text-xl border-b border-white">
           {" "}
           <label>Chest</label>

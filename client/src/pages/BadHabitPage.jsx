@@ -8,18 +8,18 @@ function BadHabitPage() {
 
   useEffect(() => {
     getBadHabits();
-  }, []);
+  }, [getBadHabits]);
 
   if (badhabits.length === 0)
     return (
       <div className="flex p-1 flex-col">
         <Link
           to="/add-badhabit"
-          className="w-full bg-sky-600 p-1 text-xl font-bold  text-center  rounded-xl"
+          className="w-full bg-sky-600 hover:bg-black duration-300 p-1 text-xl font-bold  text-center  rounded-xl"
         >
           Add bad habit
         </Link>
-        <h1>No bad habits!</h1>
+        <h2  className="text-3xl font-bold p-6">No bad habits!</h2>
       </div>
     );
 

@@ -17,14 +17,14 @@ function RegisterPage() {
   }, [isAuthenticated]);
 
   const onSubmit = handleSubmit(async (values) => {
-    signup(values);
+   await signup(values);
   });
   return (
     <div className="flex justify-center">
     <div className="flex flex-col w-96">
       <h1 className="text-4xl my-2">Register</h1>
-      {RegisterErrors.map((error, i) => (
-        <div key={i} className="bg-red-500 text-white">
+      {RegisterErrors && RegisterErrors.map((error, i) => (
+        <div key={i} className="p-1 m-1 rounded-lg bg-red-500 text-white">
           {error}
         </div>
       ))}
@@ -34,6 +34,7 @@ function RegisterPage() {
           {...register("username", { required: true })}
           placeholder="Username"
           className="bg-zinc-700 w-full my-1 p-1 text-xl rounded-lg"
+          autoFocus
         />
         {errors.username && (
           <p className="text-red-500">Username is required</p>

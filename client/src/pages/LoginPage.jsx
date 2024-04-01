@@ -24,8 +24,8 @@ function LoginPage() {
     <div className="flex justify-center">
     <div className="flex flex-col w-96">
       <h1 className="text-4xl my-2">Login</h1>
-      {SigninErrors.map((error, i) => (
-        <div key={i} className="bg-red-500 text-white">
+      {SigninErrors && SigninErrors.map((error, i) => (
+        <div key={i} className="p-1 m-1 rounded-lg bg-red-500 text-white">
           {error}
         </div>
       ))}
@@ -35,6 +35,7 @@ function LoginPage() {
           {...register("email", { required: true })}
           placeholder="Email"
           className="bg-zinc-700 w-full my-1 p-1 text-xl rounded-lg"
+          autoFocus
         />
         {errors.email && <p className="text-red-500">Email is required</p>}
         <input
