@@ -44,7 +44,11 @@ export const login = async (req, res) => {
         if (!isMatch) return res.status(400).json(['User not found, email or password invalid']);
 
         const token = await createAccessToken({ id: userFound._id })
-        res.cookie('token', token)
+        res.cookie('miCookie', token, {
+            sameSite: 'None', 
+            secure: true, 
+            httpOnly: true 
+        });
         res.json({
             id: userFound.id,
             username: userFound.username,
