@@ -23,6 +23,7 @@ function TaskFormPage() {
       }
     }
     loadTask();
+    
   }, [params.id, getTask, setValue]);
 
   const onSubmit = handleSubmit(async(data) => {
