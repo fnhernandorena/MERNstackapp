@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "nodemon src/run.js"
+    "dev": "nodemon src/run.js",
+    "start": "node src/run.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
