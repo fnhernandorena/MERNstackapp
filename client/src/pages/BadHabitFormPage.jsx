@@ -35,7 +35,7 @@ function BadHabitFormPage() {
   return (
     <div className="flex justify-center">
       <form onSubmit={onSubmit} className="flex flex-col w-96">
-        <h2 className="text-3xl font-bold mb-2">Add a new bad habit!</h2>
+        <h2 className="text-3xl font-bold mb-2">Bad habit!</h2>
         <input
           type="text"
           placeholder="Title"

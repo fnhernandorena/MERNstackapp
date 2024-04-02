@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import {
   createTrainingRequest,
@@ -22,26 +22,40 @@ export const useTraining = () => {
 
 export function TrainingProvider({ children }) {
   const [trainings, setTraining] = useState([]);
+  const [errors, setErrors] = useState([]);
 
-  const getTrainings = async () => {
+  useEffect(() => {
+    if (errors) {
+      const timer = setTimeout(() => {
+        setErrors([]);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [errors]);
+
+ const getTrainings = async () => {
     try {
       const res = await getTrainingsRequest();
       setTraining(res.data);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      setErrors(error.response.data);
     }
   };
 
   const createTraining = async (training) => {
+    try{
     createTrainingRequest(training);
+  } catch (error) {console.log(error)
+    setErrors(error.response.data);
+  }
   };
 
   const deleteTraining = async (id) => {
     try {
       const res = await deleteTrainingRequest(id);
       if (res.status === 204) setTraining(trainings.filter((training) => training._id !== id));
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      setErrors(error.response.data);
     }
   };
 
@@ -49,22 +63,22 @@ export function TrainingProvider({ children }) {
     try {
       const res = await getTrainingRequest(id);
       return res.data;
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      setErrors(error.response.data);
     }
   };
 
   const updateTraining = async (id, training) => {
     try {
       await updateTrainingRequest(id, training);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      setErrors(error.response.data);
     }
   };
 
   return (
     <TrainingContext.Provider
-      value={{ trainings, getTrainings, getTraining, deleteTraining, updateTraining, createTraining }}
+      value={{ trainings, errors, getTrainings, getTraining, deleteTraining, updateTraining, createTraining }}
     >
       {children}
     </TrainingContext.Provider>

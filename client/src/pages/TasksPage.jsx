@@ -4,7 +4,7 @@ import TaskCard from "../components/TaskCard";
 import { Link } from "react-router-dom";
 
 function TasksPage() {
-  const { getTasks, tasks, errors: TasksErrors } = useTasks();
+  const { getTasks, tasks } = useTasks();
 
   useEffect(() => {
     getTasks();
@@ -31,12 +31,7 @@ function TasksPage() {
       >
         Add task
       </Link>
-      {TasksErrors && TasksErrors.map((error, i) => (
-        <div key={i} className="p-1 m-1 rounded-lg bg-red-500 text-white">
-          {error}
-        </div>
-      ))}
-      <div className="md:grid-cols-2 grid lg:grid-cols-3">
+      <div className="grid lg:grid-cols-2">
         {tasks.map((task) => (
           <TaskCard task={task} key={task._id} />
         ))}

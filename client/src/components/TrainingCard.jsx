@@ -31,24 +31,24 @@ function TrainingCard({ training }) {
           </button>
         </div>
       </div>
-      <ul>
+      <ul className="flex flex-row gap-2">
       {training.chest && <li className="text-2xl text-sky-300">
-        Chest
+         | Chest |
         </li>}
       {training.back && <li className="text-2xl text-sky-300">
-       Back
+        | Back |
         </li>}
       {training.legs && <li className="text-2xl text-sky-300">
-       Legs
+        | Legs |
         </li>}
       {training.biceps && <li className="text-2xl text-sky-300">
-        Biceps
+       | Biceps |
         </li>}
       {training.triceps && <li className="text-2xl text-sky-300">
-        Triceps
+       | Triceps |
         </li>}
       {training.shoulders && <li className="text-2xl text-sky-300">
-        Shoulders
+       | Shoulders |
         </li>}</ul>
       <div className="text-zinc-200">{training.description}</div>
     </div>

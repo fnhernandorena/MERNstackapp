@@ -8,7 +8,6 @@ function TaskFormPage() {
     handleSubmit,
     register,
     setValue,
-    formState: { errors },
   } = useForm();
   const { createTask, getTask, updateTask, errors: TasksErrors } = useTasks();
   const navigate = useNavigate();
@@ -26,24 +25,21 @@ function TaskFormPage() {
     loadTask();
   }, [params.id, getTask, setValue]);
 
-  const onSubmit = handleSubmit((data) => {
+  const onSubmit = handleSubmit(async(data) => {
     if (params.id) {
-      updateTask(params.id, data);
+      await updateTask(params.id, data);
     } else {
-      createTask(data);
+      await createTask(data);
     }
+    if(TasksErrors.length==0) {
     navigate("/tasks");
+    }
   });
   return (
     <div className="flex justify-center">
       <form onSubmit={onSubmit} className="flex flex-col w-96">
-        <h2 className="text-3xl font-bold mb-2">Add a new task!</h2>
-        {TasksErrors &&
-          TasksErrors.map((error, i) => (
-            <div key={i} className="p-1 m-1 rounded-lg bg-red-500 text-white">
-              {error}
-            </div>
-          ))}
+        <h2 className="text-3xl font-bold mb-2">Task!</h2>
+        {TasksErrors && <p className="text-red-500">{TasksErrors.message}</p>}
         <input
           type="text"
           placeholder="Title"
@@ -51,14 +47,12 @@ function TaskFormPage() {
           className="bg-zinc-700 w-full my-1 p-1 text-xl rounded-lg"
           autoFocus
         />{" "}
-        {errors.title && <p className="text-red-500">Title is required</p>}
         <textarea
           rows="3"
           placeholder="Description"
           {...register("description")}
           className="bg-zinc-700 w-full my-1 p-1 text-xl rounded-lg"
         ></textarea>
-        {console.log(errors)}
         <div className=" p-1 flex justify-between text-xl border-b border-white">
           {" "}
           <label>Done</label>

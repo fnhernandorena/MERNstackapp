@@ -31,7 +31,7 @@ function TrainingsPage() {
       >
         Add training
       </Link>{" "}
-      <div className="md:grid-cols-2 grid lg:grid-cols-3">
+      <div className="grid lg:grid-cols-2">
         {trainings.map((training) => (
           <TrainingCard training={training} key={training._id} />
         ))}

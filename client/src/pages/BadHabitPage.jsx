@@ -8,7 +8,7 @@ function BadHabitPage() {
 
   useEffect(() => {
     getBadHabits();
-  }, [getBadHabits]);
+  }, []);
 
   if (badhabits.length === 0)
     return (

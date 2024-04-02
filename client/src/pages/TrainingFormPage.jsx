@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 function TrainingFormPage() {
   const { handleSubmit, register, setValue } = useForm();
-  const { createTraining, getTraining, updateTraining } = useTraining();
+  const { createTraining, getTraining, updateTraining, errors: TrainingErrors } = useTraining();
   const navigate = useNavigate();
   const params = useParams();
 
@@ -31,13 +31,16 @@ function TrainingFormPage() {
     } else {
       createTraining(data);
     }
-    navigate("/training");
+    if(TrainingErrors.length==0){
+      navigate("/training");
+      } console.log(TrainingErrors)
   });
   return (
     <div className="flex justify-center">
       <form onSubmit={onSubmit} className="flex flex-col w-96">
-        <h2 className="text-3xl font-bold mb-2">Add a new training!</h2>
-        <div className=" p-1 flex justify-between text-xl border-b border-white">
+        <h2 className="text-3xl font-bold mb-2">Training!</h2>
+        {TrainingErrors && <p className="text-red-500">{TrainingErrors.message}</p>}
+           <div className=" p-1 flex justify-between text-xl border-b border-white">
           {" "}
           <label>Chest</label>
           <input
