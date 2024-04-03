@@ -16,6 +16,7 @@ import TrainingsPage from "./pages/TrainingsPage";
 import TrainingFormPage from "./pages/TrainingFormPage";
 import BadHabitPage from "./pages/BadHabitPage";
 import BadHabitFormPage from "./pages/BadHabitFormPage";
+import { Footer } from "./components/Footer";
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
         <TrainingProvider>
           <BadHabitProvider>
             <BrowserRouter>
-              <main className="max-w-screen-lg container mx-auto px-10">
+              <main className="max-w-screen-lg container mx-auto px-10 mb-32">
                 <Navbar />
                 <Routes>
                   <Route path="/" element={<HomePage />} />
@@ -45,11 +46,18 @@ function App() {
                       element={<TrainingFormPage />}
                     />
                     <Route path="/badhabits" element={<BadHabitPage />} />
-                    <Route path="/add-badhabit" element={<BadHabitFormPage />} />
-                    <Route path="/badhabits/:id" element={<BadHabitFormPage />} />
+                    <Route
+                      path="/add-badhabit"
+                      element={<BadHabitFormPage />}
+                    />
+                    <Route
+                      path="/badhabits/:id"
+                      element={<BadHabitFormPage />}
+                    />
                   </Route>
                 </Routes>
               </main>
+              <Footer />
             </BrowserRouter>
           </BadHabitProvider>
         </TrainingProvider>
