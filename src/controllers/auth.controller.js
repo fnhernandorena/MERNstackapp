@@ -4,6 +4,9 @@ import jwt from 'jsonwebtoken'
 
 import { createAccessToken } from '../libs/jwt.js'
 
+var expiryDate = new Date();
+expiryDate.setDate(expiryDate.getDate() + 30);
+
 //register funtion
 export const register = async (req, res) => {
     const { username, email, password } = req.body
@@ -21,6 +24,7 @@ export const register = async (req, res) => {
         const savedUser = await newUser.save()
         const token = await createAccessToken({ id: savedUser._id })
         res.cookie('token', token, {
+            expires: expiryDate,
             sameSite: 'None', 
             secure: true, 
             httpOnly: true 
@@ -49,6 +53,7 @@ export const login = async (req, res) => {
 
         const token = await createAccessToken({ id: userFound._id })
         res.cookie('token', token, {
+            expires: expiryDate,
             sameSite: 'None', 
             secure: true, 
             httpOnly: true 
